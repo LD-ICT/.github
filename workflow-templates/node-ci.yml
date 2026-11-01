@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [$default-branch]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    # The LD ICT self-hosted runner on Hetzner when the repository variable CI_RUNNER is set, else GitHub's runners.
+    # Pull requests from forks always run on GitHub's runners, so code from outside never runs on ours.
+    runs-on: ${{ (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && vars.CI_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      # Node first: pnpm's installer needs it, and the self-hosted runner doesn't have it preinstalled on the PATH.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: pnpm/action-setup@v4
+        with:
+          dest: ${{ runner.tool_cache }}/setup-pnpm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        if: ${{ !cancelled() }}
+        run: pnpm typecheck
+      - name: Test
+        if: ${{ !cancelled() }}
+        run: pnpm test

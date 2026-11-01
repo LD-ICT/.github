@@ -1,0 +1,7 @@
+{
+  "name": "LD ICT Node CI",
+  "description": "Lint, typecheck and test a pnpm project on Node 24, on the LD ICT self-hosted runner when one is online.",
+  "iconName": "ldict",
+  "categories": ["JavaScript", "TypeScript"],
+  "filePatterns": ["pnpm-lock.yaml$"]
+}

@@ -1,0 +1,58 @@
+name: Bug report
+description: Something is broken or behaves differently than expected.
+title: "Bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please don't include passwords, API keys or customer data.
+        Security issues go through [SECURITY.md](https://github.com/LD-ICT/.github/blob/main/SECURITY.md), not here.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to /admin/domeinen
+        2. Click on ...
+        3. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Public website
+        - Shop / customer portal
+        - Werkplek (apps)
+        - Admin dashboard
+        - Hosting (DNS, mail, webhosting, domains)
+        - Infrastructure / CI
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, device and URL (production or a preview deployment).
+      placeholder: Safari 19 on iPhone, https://www.ldict.nl/prijzen
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots or logs
+      description: Paste error messages or drag screenshots here. Remove personal data first.
