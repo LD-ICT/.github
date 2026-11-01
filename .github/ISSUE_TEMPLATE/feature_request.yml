@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest an improvement or a new feature.
+title: "Feature: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is the customer or admin trying to do, and what gets in the way?
+      placeholder: As a zzp'er I want to ..., but ...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should happen? UI copy suggestions in Dutch are welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Public website
+        - Shop / customer portal
+        - Werkplek (apps)
+        - Admin dashboard
+        - Hosting (DNS, mail, webhosting, domains)
+        - Infrastructure / CI
+        - Other
+    validations:
+      required: true
